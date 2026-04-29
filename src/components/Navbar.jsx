@@ -1,128 +1,139 @@
-"use client"
+import { useState } from 'react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
-import * as React from "react"
-import Link from "next/link"
-import {
-  CircleAlertIcon,
-  CircleCheckIcon,
-  CircleDashedIcon,
-} from "lucide-react"
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState(null)
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+  const navLinks = [
+    {
+      title: 'Home',
+      href: '#',
+      dropdown: null
+    },
+    {
+      title: 'Projects',
+      href: '#',
+      dropdown: [
+        { title: 'Web Apps', href: '#' },
+        { title: 'Mobile Apps', href: '#' },
+        { title: 'UI/UX Design', href: '#' }
+      ]
+    },
+    {
+      title: 'Services',
+      href: '#',
+      dropdown: [
+        { title: 'Development', href: '#' },
+        { title: 'Consulting', href: '#' },
+        { title: 'Design', href: '#' }
+      ]
+    },
+    {
+      title: 'About',
+      href: '#',
+      dropdown: [
+        { title: 'My Story', href: '#' },
+        { title: 'Skills', href: '#' },
+        { title: 'Experience', href: '#' }
+      ]
+    },
+    {
+      title: 'Contact',
+      href: '#',
+      dropdown: null
+    }
+  ]
 
-const components = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-]
-
-export default function NavigationMenuDemo() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="w-96">
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built with Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:flex">
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="shrink-0">
+            <a href="#" className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+              Portfolio
+            </a>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <div
+                key={link.title}
+                className="relative"
+                onMouseEnter={() => link.dropdown && setOpenDropdown(link.title)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <a
+                  href={link.href}
+                  className="flex items-center px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-all duration-200"
                 >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[200px]">
-              <li>
-                <NavigationMenuLink render={<Link href="#" className="flex-row items-center gap-2"><CircleAlertIcon />Backlog</Link>} />
-                <NavigationMenuLink render={<Link href="#" className="flex-row items-center gap-2"><CircleDashedIcon />To Do</Link>} />
-                <NavigationMenuLink render={<Link href="#" className="flex-row items-center gap-2"><CircleCheckIcon />Done</Link>} />
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()} render={<Link href="/docs">Docs</Link>} />
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+                  {link.title}
+                  {link.dropdown && <ChevronDown className="ml-1 h-4 w-4" />}
+                </a>
+
+                {/* Dropdown */}
+                {link.dropdown && openDropdown === link.title && (
+                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 animate-fade-in-down">
+                    {link.dropdown.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 transition-colors"
+                      >
+                        {item.title}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden pb-4 animate-fade-in-down">
+            {navLinks.map((link) => (
+              <div key={link.title} className="px-2 py-2">
+                <button
+                  onClick={() => setOpenDropdown(openDropdown === link.title ? null : link.title)}
+                  className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  {link.title}
+                  {link.dropdown && <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${openDropdown === link.title ? 'rotate-180' : ''}`} />}
+                </button>
+                {link.dropdown && openDropdown === link.title && (
+                  <div className="ml-4 mt-2 space-y-1 animate-fade-in">
+                    {link.dropdown.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-colors"
+                      >
+                        {item.title}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </nav>
   )
 }
 
-function ListItem({ title, children, href, ...props }) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink render={
-        <Link href={href}>
-          <div className="flex flex-col gap-1 text-sm">
-            <div className="leading-none font-medium">{title}</div>
-            <div className="line-clamp-2 text-muted-foreground">{children}</div>
-          </div>
-        </Link>
-      } />
-    </li>
-  );
-}
+export default Navbar
