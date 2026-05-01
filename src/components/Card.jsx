@@ -1,7 +1,7 @@
 
 const Card = ({ title, description, image, tags, link }) => {
   return (
-    <div className="group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+    <div className="group bg-white rounded-sm shadow-sm overflow-hidden border border-gray-800 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       {/* Image */}
       {image && (
         <div className="relative overflow-hidden h-48">
@@ -16,11 +16,11 @@ const Card = ({ title, description, image, tags, link }) => {
 
       {/* Content */}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors font-mono">
           {title}
         </h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">
-          {description}
+        <p className="text-gray-600 mb-4 line-clamp-3 italic">
+          {/* {description} */}
         </p>
 
         {/* Tags */}
@@ -29,7 +29,7 @@ const Card = ({ title, description, image, tags, link }) => {
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors"
+                className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-blue-200 shadow-sm transition-colors font-mono text-sm"
               >
                 {tag}
               </span>
@@ -41,13 +41,14 @@ const Card = ({ title, description, image, tags, link }) => {
         {link && (
           <a
             href={link}
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group-hover:underline"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group-hover:underline font-mono"
           >
             View Project
-            <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            </svg> */}
           </a>
+          
         )}
       </div>
     </div>

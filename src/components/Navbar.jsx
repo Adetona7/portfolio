@@ -7,57 +7,57 @@ const Navbar = () => {
 
   const navLinks = [
     {
-      title: 'Home',
-      href: '#',
+      title: 'HOME',
+      href: '/',
       dropdown: null
     },
     {
-      title: 'Projects',
+      title: 'PROJECTS',
       href: '#',
       dropdown: [
-        { title: 'Web Apps', href: '#' },
-        { title: 'Mobile Apps', href: '#' },
-        { title: 'UI/UX Design', href: '#' }
+        { title: 'WEB APPS', href: '/' },
+        { title: 'MOBILE APPS', href: '/' },
+        { title: 'UI/UX DESIGN', href: '/' }
+      ]
+    },
+    // {
+    //   title: 'SERVICES',
+    //   href: '/',
+    //   dropdown: [
+    //     { title: 'Development', href: '/' },
+    //     { title: 'Consulting', href: '/' },
+    //     { title: 'Design', href: '/' }
+    //   ]
+    // },
+    {
+      title: 'ABOUT',
+      href: '/',
+      dropdown: [
+        { title: 'MY STORY', href: '/' },
+        { title: 'SKILLS', href: '/' },
+        { title: 'EXPERIENCE', href: '/' }
       ]
     },
     {
-      title: 'Services',
-      href: '#',
-      dropdown: [
-        { title: 'Development', href: '#' },
-        { title: 'Consulting', href: '#' },
-        { title: 'Design', href: '#' }
-      ]
-    },
-    {
-      title: 'About',
-      href: '#',
-      dropdown: [
-        { title: 'My Story', href: '#' },
-        { title: 'Skills', href: '#' },
-        { title: 'Experience', href: '#' }
-      ]
-    },
-    {
-      title: 'Contact',
-      href: '#',
+      title: 'CONTACT',
+      href: '/',
       dropdown: null
     }
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-100 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="shrink-0">
-            <a href="#" className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-              Portfolio
+            <a href="/" className="text-2xl font-mono font-extrabold text-grey-700 hover:text-blue-700 transition-colors">
+              PORTFOLIO
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1 font-mono ">
             {navLinks.map((link) => (
               <div
                 key={link.title}
@@ -67,7 +67,7 @@ const Navbar = () => {
               >
                 <a
                   href={link.href}
-                  className="flex items-center px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                  className="font-black text-xl text-l flex items-center px-4 py-2 text-gray-700 hover:text-blue-700 rounded-lg transition-all duration-200"
                 >
                   {link.title}
                   {link.dropdown && <ChevronDown className="ml-1 h-4 w-4" />}
@@ -75,12 +75,12 @@ const Navbar = () => {
 
                 {/* Dropdown */}
                 {link.dropdown && openDropdown === link.title && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 animate-fade-in-down">
+                  <div className="absolute left-0 mt-2 w-35 bg-white rounded-lg shadow-lg border border-gray-800 py-2 animate-fade-in-down">
                     {link.dropdown.map((item) => (
                       <a
                         key={item.title}
                         href={item.href}
-                        className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 transition-colors"
+                        className="block px-4 py-2 text-grey-800 hover:text-blue-700 transition-colors"
                       >
                         {item.title}
                       </a>

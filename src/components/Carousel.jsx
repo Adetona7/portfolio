@@ -27,7 +27,7 @@ const Carousel = ({ items, autoPlay = true, interval = 5000 }) => {
   }
 
   return (
-    <div className="relative w-full overflow-hidden rounded-xl">
+    <div className="relative w-full overflow-hidden font-mono">
       {/* Slides */}
       <div className="relative h-96 md:h-[500px]">
         {items.map((item, index) => (
@@ -62,14 +62,14 @@ const Carousel = ({ items, autoPlay = true, interval = 5000 }) => {
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-lg shadow-lg transition-all duration-200 hover:scale-120"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-gray-800" />
       </button>
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-lg shadow-lg transition-all duration-200 hover:scale-120"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-gray-800" />
@@ -81,7 +81,7 @@ const Carousel = ({ items, autoPlay = true, interval = 5000 }) => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 rounded-sm transition-all duration-300 ${
               index === currentIndex
                 ? 'bg-white scale-125'
                 : 'bg-white/50 hover:bg-white/75'
